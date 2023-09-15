@@ -35,4 +35,5 @@ body {
 :root {
   --element-square-size: 56px;
   --element-table-gap: 4px;
+  --search-panel-width: 350px;
 }

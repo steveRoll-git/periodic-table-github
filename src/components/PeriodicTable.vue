@@ -9,6 +9,10 @@ const hoveringElement = ref<{
   elementDef: ElementDef
 }>()
 
+const emit = defineEmits<{
+  elementClick: [elementDef: ElementDef]
+}>()
+
 function elementPointerOver(e: PointerEvent, elementDef: ElementDef) {
   if (e.target) {
     hoveringElement.value = {
@@ -33,6 +37,7 @@ function elementPointerOut(e: PointerEvent, elementDef: ElementDef) {
       :element-def="element"
       @pointerover="elementPointerOver"
       @pointerout="elementPointerOut"
+      @click="(e, ed) => emit('elementClick', ed)"
     />
   </div>
   <Teleport v-if="hoveringElement" :to="hoveringElement?.docElement">
@@ -44,6 +49,7 @@ function elementPointerOut(e: PointerEvent, elementDef: ElementDef) {
 .periodicTable {
   display: grid;
   width: calc(18 * (var(--element-square-size) + var(--element-table-gap)));
+  height: calc(10 * (var(--element-square-size) + var(--element-table-gap)));
   gap: var(--element-table-gap);
 }
 </style>

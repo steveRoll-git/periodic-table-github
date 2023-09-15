@@ -8,6 +8,7 @@ defineProps<{
 const emit = defineEmits<{
   pointerover: [event: PointerEvent, element: ElementDef]
   pointerout: [event: PointerEvent, element: ElementDef]
+  click: [event: MouseEvent, element: ElementDef]
 }>()
 </script>
 
@@ -16,6 +17,7 @@ const emit = defineEmits<{
     class="elementSquare"
     @pointerover="(e) => emit('pointerover', e, elementDef)"
     @pointerout="(e) => emit('pointerout', e, elementDef)"
+    @click="(e) => emit('click', e, elementDef)"
   >
     <div class="elementNumber">
       {{ elementDef.number }}
