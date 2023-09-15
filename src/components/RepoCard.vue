@@ -24,7 +24,7 @@ defineProps<{
   </div>
 </template>
 
-<style scoped>
+<style>
 .repoCard {
   flex: 0 0 0;
   display: grid;
