@@ -19,9 +19,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="infoPopup">
-    <div class="elementTitle">{{ elementDef.name }}</div>
-  </div>
+  <Transition appear name="slide-fade">
+    <div class="infoPopup">
+      <div class="elementTitle">{{ elementDef.name }}</div>
+    </div>
+  </Transition>
 </template>
 
 <style scoped>
