@@ -16,4 +16,9 @@ header {
   line-height: 300%;
   text-align: center;
 }
+
+main {
+  display: flex;
+  justify-content: center;
+}
 </style>

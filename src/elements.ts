@@ -1,7 +1,29 @@
+export interface ElementDef {
+  name: string
+  atomic_mass: number
+  number: number
+  period: number
+  group: number
+  source: string
+  summary: string
+  symbol: string
+  xpos: number
+  ypos: number
+  wxpos: number
+  wypos: number
+  'cpk-hex': string | null
+  image: {
+    title: string
+    url: string
+    attribution: string
+  }
+  block: string
+}
+
 /**
  * List of all elements, generated using https://github.com/Bowserinator/Periodic-Table-JSON
  */
-export const elements = [
+export const elements: ElementDef[] = [
   {
     name: 'Hydrogen',
     atomic_mass: 1.008,
