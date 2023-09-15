@@ -12,7 +12,7 @@ defineProps<{
       <img class="avatar" :src="repo.owner?.avatar_url" />
       <div style="margin-inline-start: 6px">
         <span class="repoAuthor">{{ repo.owner?.login }}/</span><br />
-        <a class="repoName" :href="repo.html_url">{{ repo.name }}</a>
+        <a class="repoName" :href="repo.html_url" target="_blank">{{ repo.name }}</a>
       </div>
     </div>
     <div class="repoDescription">
