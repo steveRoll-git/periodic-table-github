@@ -1,5 +1,7 @@
 // GitHub search schema converted to TypeScript using https://github.com/bcherny/json-schema-to-typescript
 
+import { err, ok, type Result } from './result'
+
 export type SearchResultTextMatches = {
   object_url?: string
   object_type?: string | null
@@ -8,16 +10,13 @@ export type SearchResultTextMatches = {
   matches?: {
     text?: string
     indices?: number[]
-    [k: string]: unknown
   }[]
-  [k: string]: unknown
 }[]
 
 export interface SearchResult {
   total_count: number
   incomplete_results: boolean
   items: RepoSearchResultItem[]
-  [k: string]: unknown
 }
 
 /**
@@ -114,7 +113,6 @@ export interface RepoSearchResultItem {
     push: boolean
     triage?: boolean
     pull: boolean
-    [k: string]: unknown
   }
   text_matches?: SearchResultTextMatches
   temp_clone_token?: string
@@ -126,7 +124,6 @@ export interface RepoSearchResultItem {
   allow_forking?: boolean
   is_template?: boolean
   web_commit_signoff_required?: boolean
-  [k: string]: unknown
 }
 
 /**
@@ -154,7 +151,6 @@ export interface SimpleUser {
   type: string
   site_admin: boolean
   starred_at?: string
-  [k: string]: unknown
 }
 
 /**
@@ -167,5 +163,20 @@ export interface LicenseSimple {
   spdx_id: string | null
   node_id: string
   html_url?: string
-  [k: string]: unknown
+}
+
+export interface FetchError {
+  code: number
+  data: string
+}
+
+export async function searchGitHub(name: string): Promise<Result<SearchResult, FetchError>> {
+  const response = await fetch(`https://api.github.com/search/repositories?q=${name}+in:name`)
+  if (response.ok) {
+    const json = await response.json()
+    console.log(json)
+    return ok(json)
+  } else {
+    return err({ code: response.status, data: await response.text() })
+  }
 }
