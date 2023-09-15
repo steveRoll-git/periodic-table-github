@@ -36,7 +36,7 @@ onMounted(() => {
   translate: 0 -50%;
   inset-inline-start: calc(100% + 5px);
   width: v-bind('isExpanded ? "250px" : "auto"');
-  z-index: 1;
+  z-index: 2;
 
   padding: 6px;
   background-color: white;

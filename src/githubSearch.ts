@@ -170,9 +170,12 @@ export interface FetchError {
   data: string
 }
 
-export async function searchGitHub(name: string): Promise<Result<SearchResult, FetchError>> {
+export async function searchGitHub(
+  name: string,
+  sort: string
+): Promise<Result<SearchResult, FetchError>> {
   const response = await fetch(
-    `https://api.github.com/search/repositories?q=${name}+in:name&sort=stars`
+    `https://api.github.com/search/repositories?q=${name}+in:name&sort=${sort}`
   )
   if (response.ok) {
     const json = await response.json()

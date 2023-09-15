@@ -9,16 +9,18 @@ const props = defineProps<{
   element: ElementDef
 }>()
 
+const sort = ref('stars')
+
 const loading = ref(true)
 const result = ref<Result<SearchResult, FetchError>>()
 
 const searchQuery = () => props.element.name.toLowerCase()
 
 watch(
-  () => props.element,
+  [() => props.element, sort],
   async () => {
     loading.value = true
-    const r = await searchGitHub(searchQuery())
+    const r = await searchGitHub(searchQuery(), sort.value)
     loading.value = false
     result.value = r
   },
@@ -28,8 +30,17 @@ watch(
 
 <template>
   <div class="searchPanel">
-    <div class="searchTitle">
-      {{ element.name }}
+    <div class="searchHeader">
+      <div class="searchTitle">
+        {{ element.name }}
+      </div>
+      <div>
+        Sort:
+        <select v-model="sort">
+          <option value="stars">Stars</option>
+          <option value="updated">Updated</option>
+        </select>
+      </div>
     </div>
     <img v-if="loading" class="spinner" src="@/assets/tail-spin.svg" width="42" />
     <template v-else-if="result?.ok">
@@ -62,15 +73,20 @@ watch(
   overflow: scroll;
 }
 
-.searchTitle {
+.searchHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: sticky;
   top: 0;
-  font-size: 32px;
-  line-height: 1.5;
-  font-weight: bold;
-  text-align: center;
   background-color: white;
   z-index: 1;
+  padding: 12px 8px;
+}
+
+.searchTitle {
+  font-size: 32px;
+  font-weight: bold;
 }
 
 .spinner {
