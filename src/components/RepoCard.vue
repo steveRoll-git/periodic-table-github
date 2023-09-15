@@ -8,11 +8,14 @@ defineProps<{
 
 <template>
   <div class="repoCard">
-    <div style="display: flex; height: fit-content">
+    <div style="position: relative; display: flex; height: fit-content">
       <img class="avatar" :src="repo.owner?.avatar_url" />
       <div style="margin-inline-start: 6px">
         <span class="repoAuthor">{{ repo.owner?.login }}/</span><br />
         <a class="repoName" :href="repo.html_url" target="_blank">{{ repo.name }}</a>
+      </div>
+      <div class="starCounter">
+        {{ repo.stargazers_count }}
       </div>
     </div>
     <div class="repoDescription">
@@ -47,6 +50,18 @@ defineProps<{
 
 .repoName {
   font-size: 20px;
+}
+
+.starCounter {
+  position: absolute;
+  inset-inline-end: 0;
+}
+
+.starCounter::after {
+  content: url('@/assets/star.svg');
+  margin-inline-start: 2px;
+  width: 16px;
+  height: 16px;
 }
 
 .repoDescription {

@@ -42,7 +42,7 @@ watch(
   </div>
 </template>
 
-<style scoped>
+<style>
 .searchPanel {
   display: flex;
   flex-direction: column;
@@ -63,6 +63,7 @@ watch(
   font-weight: bold;
   text-align: center;
   background-color: white;
+  z-index: 1;
 }
 
 .spinner {
