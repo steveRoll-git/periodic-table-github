@@ -13,6 +13,10 @@ function elementClicked(e: ElementDef) {
 
 <template>
   <header>Periodic Table of GitHub Repos</header>
+  <a class="sourceLink" href="https://github.com/steveRoll-git/periodic-table-github">
+    <img src="@/assets/github-mark.svg" width="24" />
+    source
+  </a>
 
   <main :class="{ searchOpen: !!clickedElement }">
     <PeriodicTable @element-click="elementClicked"></PeriodicTable>
@@ -25,6 +29,20 @@ header {
   font-size: 36px;
   line-height: 300%;
   text-align: center;
+}
+
+.sourceLink {
+  position: absolute;
+  top: 0;
+  inset-inline-end: 0;
+  padding: 16px;
+
+  display: flex;
+  align-items: center;
+}
+
+.sourceLink > img {
+  padding-inline-end: 4px;
 }
 
 main {
