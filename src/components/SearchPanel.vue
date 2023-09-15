@@ -12,11 +12,13 @@ const props = defineProps<{
 const loading = ref(true)
 const result = ref<Result<SearchResult, FetchError>>()
 
+const searchQuery = () => props.element.name.toLowerCase()
+
 watch(
   () => props.element,
   async () => {
     loading.value = true
-    const r = await searchGitHub(props.element.name.toLowerCase())
+    const r = await searchGitHub(searchQuery())
     loading.value = false
     result.value = r
   },
@@ -30,12 +32,17 @@ watch(
       {{ element.name }}
     </div>
     <img v-if="loading" class="spinner" src="@/assets/tail-spin.svg" width="42" />
-    <RepoCard
-      v-else-if="result?.ok"
-      v-for="repo in result.result.items"
-      :key="repo.full_name"
-      :repo="repo"
-    />
+    <template v-else-if="result?.ok">
+      <RepoCard v-for="repo in result.result.items" :key="repo.full_name" :repo="repo" />
+      <a
+        v-if="result.result.items.length < result.result.total_count"
+        :href="`https://github.com/search?q=${searchQuery()}+in:name&type=repositories`"
+        target="_blank"
+        style="text-align: center; margin-bottom: 6px"
+      >
+        ...and {{ result.result.total_count - result.result.items.length }} more
+      </a>
+    </template>
     <div v-else-if="result" class="errorText">
       Error {{ result.error.code }}<br />{{ result.error.data }}
     </div>
