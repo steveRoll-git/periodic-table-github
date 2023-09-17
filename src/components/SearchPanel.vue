@@ -70,7 +70,7 @@ watch(
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3);
   height: 70vh;
   margin-bottom: 32px;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .searchHeader {
