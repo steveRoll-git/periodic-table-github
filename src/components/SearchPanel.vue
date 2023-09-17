@@ -49,7 +49,7 @@ watch(
         v-if="result.result.items.length < result.result.total_count"
         :href="`https://github.com/search?q=${searchQuery()}+in:name&type=repositories`"
         target="_blank"
-        style="text-align: center; margin-bottom: 6px"
+        class="moreLink"
       >
         ...and {{ result.result.total_count - result.result.items.length }} more
       </a>
@@ -97,5 +97,11 @@ watch(
 
 .errorText {
   color: red;
+}
+
+.moreLink {
+  text-align: center;
+  margin-top: 6px;
+  margin-bottom: 12px;
 }
 </style>
