@@ -3,7 +3,7 @@ import type { ElementDef } from '@/elements'
 import { onMounted, ref } from 'vue'
 
 /** How long to wait after the popup is shown before expanding it. */
-const expansionDelay = 750
+const expansionDelay = 1000
 
 const isExpanded = ref(false)
 
