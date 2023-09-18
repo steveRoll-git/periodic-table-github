@@ -14,8 +14,13 @@ defineProps<{
         <span class="repoAuthor">{{ repo.owner?.login }}/</span><br />
         <a class="repoName" :href="repo.html_url" target="_blank">{{ repo.name }}</a>
       </div>
-      <div class="starCounter">
-        {{ repo.stargazers_count }}
+      <div style="position: absolute; inset-inline-end: 0; text-align: right">
+        <div class="starCounter">
+          {{ repo.stargazers_count }}
+        </div>
+        <div class="updated">
+          {{ repo.updated_at.slice(0, 10) }}
+        </div>
       </div>
     </div>
     <div class="repoDescription">
@@ -52,16 +57,15 @@ defineProps<{
   font-size: 20px;
 }
 
-.starCounter {
-  position: absolute;
-  inset-inline-end: 0;
-}
-
 .starCounter::after {
   content: url('@/assets/star.svg');
   margin-inline-start: 2px;
   width: 16px;
   height: 16px;
+}
+
+.updated {
+  color: gray;
 }
 
 .repoDescription {
