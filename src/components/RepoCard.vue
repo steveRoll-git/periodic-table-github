@@ -19,7 +19,7 @@ defineProps<{
           {{ repo.stargazers_count }}
         </div>
         <div class="updated">
-          {{ repo.updated_at.slice(0, 10) }}
+          {{ repo.pushed_at.slice(0, 10) }}
         </div>
       </div>
     </div>
